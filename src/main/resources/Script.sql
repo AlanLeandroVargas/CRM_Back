@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS Crm_turnero;
-GO
+
 USE Crm_turnero;
-GO
+
 
 CREATE TABLE Usuario(
 	Dni INT NOT NULL,
@@ -18,14 +18,6 @@ CREATE TABLE Medicos(
 	Apellido VARCHAR(30) NOT NULL,
 	CONSTRAINT PK_Medicos_id PRIMARY KEY(MedicoID)
 );
-CREATE TABLE Paciente(
-	IDPaciente INT,
-	Turno INT NOT NULL,
-	Dni INT NOT NULL,
-	CONSTRAINT PK_Paciente PRIMARY KEY(IDPaciente),
-	CONSTRAINT FK_Paciente_turno Turno FOREIGN KEY REFERENCES Turno(IDTurno),
-	CONSTRAINT FK_Paciente_usuario Dni FOREIGN KEY REFERENCES Usuario(Dni)
-)
 
 CREATE TABLE Turno(
 	IDTurno INT,
@@ -35,21 +27,33 @@ CREATE TABLE Turno(
 	PacienteID INT NOT NULL,
 	EsPacienteAca BOOLEAN,
 	CONSTRAINT PK_Turno_id PRIMARY KEY(IDTurno),
-	CONSTRAINT FK_Turno_medico MedicoID FOREIGN KEY REFERENCES Medicos(MedicoID),
-	CONSTRAINT FK_Turno_Usuario PacienteID FOREIGN KEY REFERENCES Usuario(Dni)
+	CONSTRAINT FK_Turno_medico FOREIGN KEY (MedicoID) REFERENCES Medicos(MedicoID),
+	CONSTRAINT FK_Turno_Usuario FOREIGN KEY (PacienteID) REFERENCES Usuario(Dni)
 );
+
+CREATE TABLE Paciente(
+	IDPaciente INT,
+	Turno INT NOT NULL,
+	Dni INT NOT NULL,
+	CONSTRAINT PK_Paciente PRIMARY KEY(IDPaciente),
+	CONSTRAINT FK_Paciente_turno FOREIGN KEY (Turno) REFERENCES Turno(IDTurno),
+	CONSTRAINT FK_Paciente_usuario FOREIGN KEY (Dni) REFERENCES Usuario(Dni)
+);
+
+
 CREATE TABLE Especialidades(
 	IDEspecialidad INT,
 	MedicoID INT NOT NULL,
-	Especialidad VARCHAR(30) NOT NULL
+	Especialidad VARCHAR(30) NOT NULL,
+    CONSTRAINT FK_Especialidades PRIMARY KEY (IDEspecialidad)
 );
 CREATE TABLE Especialista(
 	Nombre VARCHAR(30) NOT NULL,
 	Apellido VARCHAR(30) NOT NULL,
 	Especialidades INT,
 	IDTurno INT,
-	CONSTRAINT FK_Especialista_turno IDTurno FOREIGN KEY REFERENCES Turno(IDTurno),
-	CONSTRAINT FK_Especialidades_especialidad FOREIGN KEY REFERENCES Especialidades(IDEspecialidad)
+	CONSTRAINT FK_Especialista_turno FOREIGN KEY (IDTurno) REFERENCES Turno(IDTurno),
+	CONSTRAINT FK_Especialidades_especialidad FOREIGN KEY (Especialidades) REFERENCES Especialidades(IDEspecialidad)
 );
 
 
