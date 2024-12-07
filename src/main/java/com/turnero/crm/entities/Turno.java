@@ -1,8 +1,6 @@
 package com.turnero.crm.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.type.descriptor.jdbc.DateJdbcType;
 
 
@@ -10,6 +8,9 @@ import org.hibernate.type.descriptor.jdbc.DateJdbcType;
 @Table
 public class Turno {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IDTurno")
     private int idTurno;
     @Column(name = "Fecha")

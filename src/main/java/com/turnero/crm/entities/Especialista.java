@@ -1,19 +1,22 @@
 package com.turnero.crm.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Especialista")
 public class Especialista {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "IDEspecialista")
+    private int idEspecialista;
     @Column(name = "Nombre")
     private String nombre;
     @Column(name = "Apellido")
     private String apellido;
     @Column(name = "Especialidades")
     private int Especialidades;
+
     @Column(name = "IDTurno")
     private int IDTurno;
 

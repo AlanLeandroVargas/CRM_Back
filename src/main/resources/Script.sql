@@ -48,6 +48,7 @@ CREATE TABLE Especialidades(
     CONSTRAINT FK_Especialidades PRIMARY KEY (IDEspecialidad)
 );
 CREATE TABLE Especialista(
+	IDEspecialista INT PRIMARY KEY,
 	Nombre VARCHAR(30) NOT NULL,
 	Apellido VARCHAR(30) NOT NULL,
 	Especialidades INT,
