@@ -2,6 +2,8 @@ package com.turnero.crm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "Paciente")
@@ -11,18 +13,21 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IDPaciente")
     private int idPaciente;
-    @Column(name = "Turno")
-    private int turno;
-    @Column(name = "Dni")
-    private int dni;
 
+    @OneToMany
+    @JoinColumn(name = "Turno")
+    private List<Turno> turnos;
+
+    @OneToOne
+    @JoinColumn(name = "Dni")
+    private int dni;
 
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, int turno, int dni) {
+    public Paciente(int idPaciente, List<Turno> turnos, int dni) {
         this.idPaciente = idPaciente;
-        this.turno = turno;
+        this.turnos = turnos;
         this.dni = dni;
     }
 
@@ -34,12 +39,12 @@ public class Paciente {
         this.idPaciente = idPaciente;
     }
 
-    public int getTurno() {
-        return turno;
+    public List<Turno> getTurnos() {
+        return turnos;
     }
 
-    public void setTurno(int turno) {
-        this.turno = turno;
+    public void setTurnos(int turno) {
+        this.turnos = turnos;
     }
 
     public int getDni() {

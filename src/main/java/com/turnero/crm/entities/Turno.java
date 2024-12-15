@@ -3,6 +3,8 @@ package com.turnero.crm.entities;
 import jakarta.persistence.*;
 import org.hibernate.type.descriptor.jdbc.DateJdbcType;
 
+import java.util.List;
+
 
 @Entity(name = "Turno")
 @Table
@@ -13,19 +15,27 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IDTurno")
     private int idTurno;
+
     @Column(name = "Fecha")
     private DateJdbcType fecha;
     @Column(name = "Disponible")
     private boolean disponible;
-    @Column(name = "MedicoID")
+
+
+    @ManyToOne
+    @JoinColumn(name = "MedicoID")
     private int medicoID;
-    @Column(name = "PacienteID")
-    private int pacienteID;
+
+    @OneToMany
+    @JoinColumn(name = "PacienteID")
+    private List<Paciente> pacienteID;
+
+
     @Column(name = "EsPacienteAca")
     private boolean esPacienteAca;
 
     public Turno(){}
-    public Turno(int idTurno, DateJdbcType fecha, boolean disponible, int medicoID, int pacienteID, boolean esPacienteAca) {
+    public Turno(int idTurno, DateJdbcType fecha, boolean disponible, int medicoID, List<Paciente> pacienteID, boolean esPacienteAca) {
         this.idTurno = idTurno;
         this.fecha = fecha;
         this.disponible = disponible;
@@ -66,11 +76,11 @@ public class Turno {
         this.medicoID = medicoID;
     }
 
-    public int getPacienteID() {
+    public List<Paciente> getPacienteID() {
         return pacienteID;
     }
 
-    public void setPacienteID(int pacienteID) {
+    public void setPacienteID(List<Paciente> pacienteID) {
         this.pacienteID = pacienteID;
     }
 

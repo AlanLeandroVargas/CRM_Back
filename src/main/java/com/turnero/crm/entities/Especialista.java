@@ -2,6 +2,8 @@ package com.turnero.crm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Especialista")
 public class Especialista {
@@ -14,20 +16,23 @@ public class Especialista {
     private String nombre;
     @Column(name = "Apellido")
     private String apellido;
-    @Column(name = "Especialidades")
-    private int Especialidades;
 
-    @Column(name = "IDTurno")
-    private int IDTurno;
+    @ManyToOne
+    @JoinColumn(name = "IDEspecialidades")
+    private List<Especialidades> especialidades;
+
+    @ManyToOne
+    @JoinColumn(name = "IDTurno")
+    private List<Turno> idTurno;
 
     public Especialista() {
     }
 
-    public Especialista(String nombre, String apellido, int especialidades, int IDTurno) {
+    public Especialista(String nombre, String apellido, List<Especialidades> especialidades, List<Turno> idTurno) {
         this.nombre = nombre;
         this.apellido = apellido;
-        Especialidades = especialidades;
-        this.IDTurno = IDTurno;
+        this.especialidades = especialidades;
+        this.idTurno = idTurno;
     }
 
     public String getNombre() {
@@ -46,19 +51,19 @@ public class Especialista {
         this.apellido = apellido;
     }
 
-    public int getEspecialidades() {
-        return Especialidades;
+    public List<Especialidades> getEspecialidades() {
+        return especialidades;
     }
 
-    public void setEspecialidades(int especialidades) {
-        Especialidades = especialidades;
+    public void setEspecialidades(List<Especialidades> especialidades) {
+        this.especialidades = especialidades;
     }
 
-    public int getIDTurno() {
-        return IDTurno;
+    public List<Turno> getIDTurno() {
+        return idTurno;
     }
 
-    public void setIDTurno(int IDTurno) {
-        this.IDTurno = IDTurno;
+    public void setIDTurno(List<Turno> IDTurno) {
+        this.idTurno = idTurno;
     }
 }
