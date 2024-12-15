@@ -2,7 +2,7 @@ package com.turnero.crm.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "Especialista")
@@ -18,17 +18,17 @@ public class Especialista {
     private String apellido;
 
     @ManyToOne
-    @JoinColumn(name = "IDEspecialidades")
-    private List<Especialidades> especialidades;
+    @JoinColumn(name = "Especialidades")
+    private Especialidades especialidades;
 
     @ManyToOne
     @JoinColumn(name = "IDTurno")
-    private List<Turno> idTurno;
+    private Turno idTurno;
 
     public Especialista() {
     }
 
-    public Especialista(String nombre, String apellido, List<Especialidades> especialidades, List<Turno> idTurno) {
+    public Especialista(String nombre, String apellido, Especialidades especialidades, Turno idTurno) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.especialidades = especialidades;
@@ -51,19 +51,19 @@ public class Especialista {
         this.apellido = apellido;
     }
 
-    public List<Especialidades> getEspecialidades() {
+    public Especialidades getEspecialidades() {
         return especialidades;
     }
 
-    public void setEspecialidades(List<Especialidades> especialidades) {
+    public void setEspecialidades(Especialidades especialidades) {
         this.especialidades = especialidades;
     }
 
-    public List<Turno> getIDTurno() {
+    public Turno getIDTurno() {
         return idTurno;
     }
 
-    public void setIDTurno(List<Turno> IDTurno) {
+    public void setIDTurno(Turno IDTurno) {
         this.idTurno = idTurno;
     }
 }

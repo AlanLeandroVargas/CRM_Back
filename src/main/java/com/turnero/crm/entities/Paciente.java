@@ -18,7 +18,7 @@ public class Paciente {
     @JoinColumn(name = "Turno")
     private List<Turno> turnos;
 
-    @OneToOne
+
     @JoinColumn(name = "Dni")
     private int dni;
 

@@ -24,7 +24,7 @@ public class Turno {
 
     @ManyToOne
     @JoinColumn(name = "MedicoID")
-    private int medicoID;
+    private Medicos medicoID;
 
     @OneToMany
     @JoinColumn(name = "PacienteID")
@@ -35,7 +35,7 @@ public class Turno {
     private boolean esPacienteAca;
 
     public Turno(){}
-    public Turno(int idTurno, DateJdbcType fecha, boolean disponible, int medicoID, List<Paciente> pacienteID, boolean esPacienteAca) {
+    public Turno(int idTurno, DateJdbcType fecha, boolean disponible, Medicos medicoID, List<Paciente> pacienteID, boolean esPacienteAca) {
         this.idTurno = idTurno;
         this.fecha = fecha;
         this.disponible = disponible;
@@ -68,11 +68,11 @@ public class Turno {
         this.disponible = disponible;
     }
 
-    public int getMedicoID() {
+    public Medicos getMedicoID() {
         return medicoID;
     }
 
-    public void setMedicoID(int medicoID) {
+    public void setMedicoID(Medicos medicoID) {
         this.medicoID = medicoID;
     }
 
